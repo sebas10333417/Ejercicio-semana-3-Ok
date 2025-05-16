@@ -1,65 +1,109 @@
-lista = {}
+viaje = {}
+contador = 0
+def seleccionar_destino ():
+    while True:
+        tipo_vuelo = int(input("""
+        ==============================
+        ==============================
+        1. Internacional
+        2. Nacional
+        ==============================
+        ==============================
+        Selecciona una opcion en numero \n
+        """))
 
-continuar = True
-
-while continuar:
-    print("!!! BIENVENIDO AL MENU !!!")
-    lista_menu = int(input("""
-    1. Añadir productos
-    2. Consultar productos
-    3. Actualizar precios
-    4. Eliminar productos
-    5. Calcular valor total del inventario \n
-    --------------------
-    --------------------
-    Por favor ingresa una opcion
-    --------------------
-    --------------------
-    """))
-
-    if lista_menu == 1:
-        id = int(input("Por favor ingresa el ID del producto -> : \n"))
-        producto = input("Por favor ingresa el nombre del producto -> : \n")
-        precio = int(input("Por favor ingresa el valor del producto -> : \n"))
-        cantidad = int(input("Por favor ingresa la cantidad a registrar -> : \n "))
-
-        lista[id] = {
-            "Nombre producto" : producto,
-            "Precio producto" : precio,
-            "Cantidad disponible" : cantidad
-        }
-
-        for i , n in lista.items():
-            print(i , n )
-
-    elif lista_menu == 2:
-        consultar = int(input("Ingresa el ID del producto que quieres consultar -> : \n"))
-        if not consultar in lista:
-            print("El ID del producto no se encuentra registrado. ")
-
-        else:
-            info_producto = lista.get(consultar)
-            print(f"{consultar} {info_producto}")
-
-    elif lista_menu == 3:
-        actualizar = int(input("Por favor ingresa el ID del producto que deseas actualizar -> : \n "))
-        precio_nuevo = int(input("Por favor ingresa el nuevo valor -> : \n"))
-        lista[actualizar]["Precio producto"] = precio_nuevo
-        print(lista)
-
-    elif lista_menu == 4:
-        el  = int(input("Ingresa el ID del producto que deseas eliminar -> : \n"))
-        del lista[el]
-        print("El producto fue eliminado con exito ")
-        print(lista)
-
-    elif lista_menu == 5:
-        total = 0
+        if tipo_vuelo == 1: 
+            print("="*30)
+            print("!!! Viaje Internacional disponible !!! \n Medellin - España \n")
+            print("!!! Fecha -> Septiembre 26 !!!: \n  Hora -> 17:50 Hrs")
+            categoria = ("!!! Viaje Internacional disponible !!! \n Medellin - España \n")
+            fecha = ("!!! Fecha -> Septiembre 26 !!!: \n  Hora -> 17:50 Hrs ")
+            usuario = input("Quieres resevar este viaje? / si/no \n ")
+            if usuario == "si":
+                print("Tu viaje fue reservado con exito")
+                vuelo = {
+                        "Categoria" : categoria,
+                        "Intinerario" : fecha
+                        }
+                for i , n in vuelo.items():
+                    print(i,n)
+                break
+            else:
+                print("="*30)
+                continue
         
-        for u , m in lista.items():
-            cantidad_sub = m.get("Cantidad disponible")
-            precio_sub = m.get("Precio producto")
-            sub_total = (cantidad_sub * precio_sub)
-            total = total + sub_total 
-        print("El total del inventario es -> :")
-        print(total)
+        elif tipo_vuelo == 2:
+            print("="*30)
+            print("!!! Viaje nacional disponible !!!  \n Medellin - Bogota")
+            print("!!! Fecha -> Octubre 29 !!! \n Hora -> 20:00 Hrs")
+            categoria1 = ("!!! Viaje nacional disponible !!!  \n Medellin - Bogota ")
+            fecha2 = ("!!! Fecha -> Octubre 29 !!! \n Hora -> 20:00 Hrs ")
+            usuario2 = input("Quieres reservar este viaje? / si/no \n")
+            if usuario2 == "si":
+                print("Tu viaje fue reservado con exito")
+                print("="*30)
+                vuelo2 = { 
+                          "Categoria": categoria1,
+                          "Intinerario" : fecha2}
+                
+                for i, n in vuelo2.items():
+                    print(vuelo2)
+                break
+            else:
+                print("="*30)
+                continue
+            
+    return vuelo, vuelo2
+                
+            
+def capacidad_viaje ():
+    while True:
+        carga = int(input("""
+        !!Opciones de quipaje!! \n
+        1. Equipaje de mano 
+        2. Equipaje de bodega \n
+        * Selecciona una opcion *
+        
+        """))
+        
+        if carga == 1:
+            print("Equipaje de mano seleccionado, peso maximo 10kg: ")
+            usuario3 = float(input("Ingresa el peso de tu equipaje \n "))
+            if usuario3 > 13:
+                print("Peso no aceptado")
+            else:
+                print("Peso admitidido \n valor -> 120.000 $")
+                break
+        elif carga == 2:
+            print("Equipaje de bodega seleccionado, peso maximo 50 kg")
+            usuario4 = int(input("Ingresa el peso de tu equipaje \n "))
+            if usuario4 > 50:
+                print("Peso no aceptado")
+                continue
+            else:
+                print("Peso admitidido \n valor -> 270.000 $")
+                break
+
+def comprar_boleto(viaje):
+    
+    while True:
+        
+        print("Por favor ingresa los siguientes datos \n ")
+        num_id = int(input("Por favor ingresa tu numero de identificacion -> : \n"))
+        comprador = input("Por favor ingresa tu nombre -> : \n")
+        apellido = input("Por favor ingresa tu apellido -> :\n")
+        
+        viaje[num_id] = {
+            "Comprador" : comprador,
+            "Apellido" : apellido
+            }
+        
+        for i, n in viaje.items():
+            print(i , n)
+            break
+        seguir_comprando = input("quiere comprar otro boleto? (si/no)")
+        if seguir_comprando == "si":
+            print("")
+        elif seguir_comprando == "no":
+            break
+    return viaje
